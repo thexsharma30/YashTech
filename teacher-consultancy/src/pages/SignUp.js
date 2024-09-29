@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
-import '../styles/SignUp.css';
+import { useNavigate } from 'react-router-dom';
+import '../styles/SignUp.css'; // Corrected path
 
 function SignUp() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle sign-up logic, e.g., send a request to the backend
     console.log('Sign-Up:', { name, email, password });
+  };
+
+  const handleSignInRedirect = () => {
+    navigate('/');
   };
 
   return (
@@ -39,7 +44,12 @@ function SignUp() {
         />
         <button type="submit">Sign Up</button>
       </form>
-      <p>Already have an account? <a href="/signin">Sign In</a></p>
+      <p>
+        Already have an account?{' '}
+        <span onClick={handleSignInRedirect} style={{ color: 'blue', cursor: 'pointer' }}>
+          Sign In
+        </span>
+      </p>
     </div>
   );
 }
